@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
-import fcntl
 
 model = pickle.load(open('Finalmodel (1).pkl', 'rb'))
 
@@ -22,8 +21,11 @@ def predict():
     Talk = request.form.get('Talk')
     Finance = request.form.get('Finance')
     Lone = request.form.get('Lone')
+    Gender = request.form.get('Gender')
+    Stable = request.form.get('Stable')
+    Depression = request.form.get('Depression')
 
-    input_query = np.array([[Age, Friends, Outing, Comm, Talk, Finance, Lone]])
+    input_query = np.array([[Age, Gender, Friends, Outing, Stable, Comm, Talk, Finance, Lone, Depression]])
 
     result = model.predict(input_query)[0]
 
